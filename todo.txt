@@ -1,4 +1,3 @@
--> create word blocks
 -> add functionality to click on them so they can jump to the top block
 -> add Submit button
 -> add functionality to verify if sentence is correct or not
