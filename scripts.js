@@ -13,6 +13,7 @@ to iterate over if adding, moving, or removing nodes.
 
 const wordBlocks = Array.from(document.getElementsByClassName('wordBlock'))
 const buildSentence = document.querySelector('.buildSentence')
+const wordBlocksContainer = document.querySelector('.wordBlocks')
 
 for (let i = 0; i < wordBlocks.length; i++) {
     wordBlocks[i].addEventListener('click', () => {
@@ -21,10 +22,19 @@ for (let i = 0; i < wordBlocks.length; i++) {
         div.innerHTML = wordBlocks[i].innerHTML
         div.classList.add('wordBlockClicked')
 
-        wordBlocks[i].classList.add('hide')
-        wordBlocks[i].classList.remove('wordBlock')
+        wordBlocksContainer.removeChild(wordBlocks[i])
 
         buildSentence.append(div)
+
+        // needs more work
+        div.addEventListener('click', () => {
+            div.classList.remove('wordBlockClicked')
+            div.classList.add('wordBlock')
+
+            wordBlocksContainer.append(div)
+
+            buildSentence.removeChild(div)
+        })
     })
 }
 

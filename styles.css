@@ -26,7 +26,7 @@ body {
     font-weight: bold;
 }
 
-.wordBlocks {
+.wordBlocks, .buildSentence {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -37,6 +37,7 @@ body {
     background-color: rgb(255, 148, 166);
     border-radius: 5px;
     height: fit-content;
+    cursor: pointer;
 }
 
 .hide {
