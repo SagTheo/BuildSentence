@@ -1,3 +1,11 @@
--> add Submit button
--> add functionality to verify if sentence is correct or not
--> add functionality to allow user to put word blocks back 
+First version:
+-> click on word block to put it in buildSentence block
+-> reset button if user wants to start over again
+-> submit button to verify whether sentence is correct or not
+
+
+Second version
+-> click on word block to put it in buildSentence block
+-> reset button if user wants to start over again
+-> possibility to put each block back individually
+-> submit button to verify whether sentence is correct or not

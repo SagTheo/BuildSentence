@@ -25,16 +25,6 @@ for (let i = 0; i < wordBlocks.length; i++) {
         wordBlocksContainer.removeChild(wordBlocks[i])
 
         buildSentence.append(div)
-
-        // needs more work
-        div.addEventListener('click', () => {
-            div.classList.remove('wordBlockClicked')
-            div.classList.add('wordBlock')
-
-            wordBlocksContainer.append(div)
-
-            buildSentence.removeChild(div)
-        })
     })
 }
 
