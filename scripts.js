@@ -50,7 +50,6 @@ reset.addEventListener('click', () => {
 
         wordBlocksContainer.append(div)
 
-        // doesn't work -> event listener is not added
-        addEventToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
+        addEventToWordBlock(div, wordBlocksContainer, buildSentence)
     }
 })
