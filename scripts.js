@@ -30,10 +30,12 @@ const addEventToWordBlock = (wordBlock, wordBlocksContainer, buildSentence) => {
     })
 }
 
+const sentenceToMatch = 'Build a sentence'
 const wordBlocks = Array.from(document.getElementsByClassName('wordBlock'))
 const buildSentence = document.querySelector('.buildSentence')
 const wordBlocksContainer = document.querySelector('.wordBlocks')
 const reset = document.querySelector('.reset')
+const submit = document.querySelector('.submit')
 
 for (let i = 0; i < wordBlocks.length; i++) {
     addEventToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
@@ -51,5 +53,22 @@ reset.addEventListener('click', () => {
         wordBlocksContainer.append(div)
 
         addEventToWordBlock(div, wordBlocksContainer, buildSentence)
+    }
+})
+
+submit.addEventListener('click', () => {
+    const sentenceBuilt = Array.from(buildSentence.children).map(el => el.innerHTML)
+    let result = null
+
+    if (sentenceBuilt.length > 0) {
+        result = sentenceBuilt.reduce((acc, curr) => acc + ' ' + curr) 
+        
+        if (result !== sentenceToMatch) {
+            alert('Wrong answer')
+        } else {
+            alert('Correct answer')
+        }
+    } else {
+        alert('No answer given')
     }
 })
