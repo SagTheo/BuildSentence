@@ -2,8 +2,8 @@ First version:
 -> click on word block to put it in buildSentence block / done
 -> reset button if user wants to start over again / done
 -> submit button to verify whether sentence is correct or not / done
--> if sentence is correct: make word blocks green
--> if sentence is incorrect: make word blocks that are not in the right position red
+-> if sentence is correct: make word blocks green / done
+-> if sentence is incorrect: make word blocks that are not in the right position red / done
 
 
 Second version

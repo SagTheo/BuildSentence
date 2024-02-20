@@ -30,7 +30,7 @@ const addEventToWordBlock = (wordBlock, wordBlocksContainer, buildSentence) => {
     })
 }
 
-const sentenceToMatch = 'Build a sentence'
+const sentenceToMatch = ['Build', 'a', 'sentence']
 const wordBlocks = Array.from(document.getElementsByClassName('wordBlock'))
 const buildSentence = document.querySelector('.buildSentence')
 const wordBlocksContainer = document.querySelector('.wordBlocks')
@@ -57,18 +57,24 @@ reset.addEventListener('click', () => {
 })
 
 submit.addEventListener('click', () => {
-    const sentenceBuilt = Array.from(buildSentence.children).map(el => el.innerHTML)
+    const sentenceBuiltArr = Array.from(buildSentence.children)
+    // const sentenceBuilt = sentenceBuiltArr.map(el => el.innerHTML)
     let result = null
 
-    if (sentenceBuilt.length > 0) {
-        result = sentenceBuilt.reduce((acc, curr) => acc + ' ' + curr) 
+    if (sentenceBuiltArr.length === sentenceToMatch.length) {
+        // Not needed, just to practice the use of reduce
+        // result = sentenceBuilt.reduce((acc, curr) => acc + ' ' + curr)
         
-        if (result !== sentenceToMatch) {
-            alert('Wrong answer')
-        } else {
-            alert('Correct answer')
+        for (let i = 0; i < sentenceToMatch.length; i++) {
+            if (sentenceToMatch[i] === sentenceBuiltArr[i].innerHTML) {
+                sentenceBuiltArr[i].classList.add('correct')
+            } else {
+                sentenceBuiltArr[i].classList.add('incorrect')
+            }
         }
     } else {
-        alert('No answer given')
+        sentenceBuiltArr.forEach(el => {
+            el.classList.add('incorrect')
+        })
     }
 })

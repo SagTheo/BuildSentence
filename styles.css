@@ -50,9 +50,20 @@ body {
     color: white;
 }
 
-.hide {
-    display: none;
+.correct {
+    background-color: rgb(51, 202, 51);
 }
+
+.incorrect {
+    background-color: rgb(229, 54, 54);
+}
+
+
+/*
+
+Buttons
+
+*/
 
 .buttons {
     display: flex;
