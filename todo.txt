@@ -7,7 +7,7 @@ First version:
 
 
 Second version
--> click on word block to put it in buildSentence block
--> reset button if user wants to start over again
+-> click on word block to put it in buildSentence block / done
+-> reset button if user wants to start over again / done
 -> possibility to put each block back individually
--> submit button to verify whether sentence is correct or not
+-> submit button to verify whether sentence is correct or not / done

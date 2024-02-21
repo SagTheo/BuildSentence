@@ -17,16 +17,21 @@ const removeChildren = container => {
     }
 }
 
-const addEventToWordBlock = (wordBlock, wordBlocksContainer, buildSentence) => {
+const addEventToWordBlock = (
+    wordBlock, 
+    classToAdd, 
+    startingContainer, 
+    targetContainer
+) => {
     wordBlock.addEventListener('click', () => {
 
         let div = document.createElement('div')
         div.innerHTML = wordBlock.innerHTML
-        div.classList.add('wordBlockClicked')
+        div.classList.add(classToAdd)
 
-        wordBlocksContainer.removeChild(wordBlock)
+        startingContainer.removeChild(wordBlock)
 
-        buildSentence.append(div)
+        targetContainer.append(div)
     })
 }
 
@@ -36,9 +41,39 @@ const buildSentence = document.querySelector('.buildSentence')
 const wordBlocksContainer = document.querySelector('.wordBlocks')
 const reset = document.querySelector('.reset')
 const submit = document.querySelector('.submit')
+const test = document.querySelector('#test')
+
+
+test.addEventListener('click', () => {
+    // let div = document.createElement('div')
+    // div.innerHTML = 'Test'
+
+    // wordBlocksContainer.removeChild(test)
+
+    // buildSentence.append(div)
+
+    // div.addEventListener('click', () => {
+    //     let div2 = document.createElement('div')
+    //     div2.innerHTML = 'Test'
+
+    //     buildSentence.removeChild(div)
+
+    //     wordBlocksContainer.append(div2)
+    // })
+
+    wordBlocksContainer.removeChild(test)
+    buildSentence.append(test)
+
+    test.addEventListener('click', () => {
+        // creates DOMException because outer click event on test is called as well,
+        // but test is no longer a child of wordBlocksContainer at this point
+        buildSentence.removeChild(test)
+        wordBlocksContainer.append(test)
+    })
+})
 
 for (let i = 0; i < wordBlocks.length; i++) {
-    addEventToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
+    addEventToWordBlock(wordBlocks[i], 'wordBlockClicked', wordBlocksContainer, buildSentence)
 }
 
 reset.addEventListener('click', () => {
@@ -52,7 +87,7 @@ reset.addEventListener('click', () => {
 
         wordBlocksContainer.append(div)
 
-        addEventToWordBlock(div, wordBlocksContainer, buildSentence)
+        addEventToWordBlock(div, 'wordBlockClicked', wordBlocksContainer, buildSentence)
     }
 })
 
