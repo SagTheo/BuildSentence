@@ -19,20 +19,34 @@ const removeChildren = container => {
 
 const addEventToWordBlock = (
     wordBlock, 
-    classToAdd, 
-    startingContainer, 
-    targetContainer
+    container1, 
+    container2
 ) => {
     wordBlock.addEventListener('click', () => {
-
-        let div = document.createElement('div')
-        div.innerHTML = wordBlock.innerHTML
-        div.classList.add(classToAdd)
-
-        startingContainer.removeChild(wordBlock)
-
-        targetContainer.append(div)
+        toggleBlock(wordBlock, container1, container2)
     })
+}
+
+/*
+
+Needs more work: if one block has been toggled to buildSentence, 
+                 and switchIt is now set to false, 
+                 the other blocks won't be able to be toggled (because else statement
+                 will be fired directly, hence the DOMException fired)
+
+*/
+const toggleBlock = (block, container1, container2) => {
+    if (switchIt) {
+        container1.removeChild(block)
+        container2.append(block)
+
+        switchIt = !switchIt
+    } else {
+        container2.removeChild(block)
+        container1.append(block)
+
+        switchIt = !switchIt
+    }
 }
 
 const sentenceToMatch = ['Build', 'a', 'sentence']
@@ -41,39 +55,10 @@ const buildSentence = document.querySelector('.buildSentence')
 const wordBlocksContainer = document.querySelector('.wordBlocks')
 const reset = document.querySelector('.reset')
 const submit = document.querySelector('.submit')
-const test = document.querySelector('#test')
-
-
-test.addEventListener('click', () => {
-    // let div = document.createElement('div')
-    // div.innerHTML = 'Test'
-
-    // wordBlocksContainer.removeChild(test)
-
-    // buildSentence.append(div)
-
-    // div.addEventListener('click', () => {
-    //     let div2 = document.createElement('div')
-    //     div2.innerHTML = 'Test'
-
-    //     buildSentence.removeChild(div)
-
-    //     wordBlocksContainer.append(div2)
-    // })
-
-    wordBlocksContainer.removeChild(test)
-    buildSentence.append(test)
-
-    test.addEventListener('click', () => {
-        // creates DOMException because outer click event on test is called as well,
-        // but test is no longer a child of wordBlocksContainer at this point
-        buildSentence.removeChild(test)
-        wordBlocksContainer.append(test)
-    })
-})
+let switchIt = true
 
 for (let i = 0; i < wordBlocks.length; i++) {
-    addEventToWordBlock(wordBlocks[i], 'wordBlockClicked', wordBlocksContainer, buildSentence)
+    addEventToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
 }
 
 reset.addEventListener('click', () => {
@@ -87,7 +72,7 @@ reset.addEventListener('click', () => {
 
         wordBlocksContainer.append(div)
 
-        addEventToWordBlock(div, 'wordBlockClicked', wordBlocksContainer, buildSentence)
+        addEventToWordBlock(div, wordBlocksContainer, buildSentence)
     }
 })
 
