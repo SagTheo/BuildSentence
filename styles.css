@@ -36,20 +36,12 @@ body {
 }
 
 .wordBlock {
-    cursor: pointer;
-}
-
-.wordBlock, .wordBlockClicked {
     padding: 10px;
     background-color: rgb(255, 148, 166);
     border-radius: 5px;
     height: fit-content;
+    cursor: pointer;
 }
-
-.wordBlockClicked {
-    color: white;
-}
-
 .correct {
     background-color: rgb(51, 202, 51);
 }

@@ -9,5 +9,5 @@ First version:
 Second version
 -> click on word block to put it in buildSentence block / done
 -> reset button if user wants to start over again / done
--> possibility to put each block back individually
+-> possibility to put each block back individually / done
 -> submit button to verify whether sentence is correct or not / done

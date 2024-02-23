@@ -17,36 +17,26 @@ const removeChildren = container => {
     }
 }
 
-const addEventToWordBlock = (
+/*
+
+Needs more work: after clicking on submit button, if block is placed back individually,
+                 it keeps the correct or incorrect class
+
+*/
+const addToggleToWordBlock = (
     wordBlock, 
     container1, 
     container2
 ) => {
     wordBlock.addEventListener('click', () => {
-        toggleBlock(wordBlock, container1, container2)
+        if (wordBlock.classList.toggle('clicked')) {
+            container1.removeChild(wordBlock)
+            container2.append(wordBlock)
+        } else {
+            container2.removeChild(wordBlock)
+            container1.append(wordBlock)
+        }
     })
-}
-
-/*
-
-Needs more work: if one block has been toggled to buildSentence, 
-                 and switchIt is now set to false, 
-                 the other blocks won't be able to be toggled (because else statement
-                 will be fired directly, hence the DOMException fired)
-
-*/
-const toggleBlock = (block, container1, container2) => {
-    if (switchIt) {
-        container1.removeChild(block)
-        container2.append(block)
-
-        switchIt = !switchIt
-    } else {
-        container2.removeChild(block)
-        container1.append(block)
-
-        switchIt = !switchIt
-    }
 }
 
 const sentenceToMatch = ['Build', 'a', 'sentence']
@@ -55,10 +45,9 @@ const buildSentence = document.querySelector('.buildSentence')
 const wordBlocksContainer = document.querySelector('.wordBlocks')
 const reset = document.querySelector('.reset')
 const submit = document.querySelector('.submit')
-let switchIt = true
 
 for (let i = 0; i < wordBlocks.length; i++) {
-    addEventToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
+    addToggleToWordBlock(wordBlocks[i], wordBlocksContainer, buildSentence)
 }
 
 reset.addEventListener('click', () => {
@@ -68,18 +57,18 @@ reset.addEventListener('click', () => {
     for (let i = 0; i < wordBlocks.length; i++) {
         let div = document.createElement('div')
         div.innerHTML = wordBlocks[i].innerHTML
-        div.classList.add(wordBlocks[i].className)
+        div.classList.add('wordBlock')
 
         wordBlocksContainer.append(div)
 
-        addEventToWordBlock(div, wordBlocksContainer, buildSentence)
+        addToggleToWordBlock(div, wordBlocksContainer, buildSentence)
     }
 })
 
 submit.addEventListener('click', () => {
     const sentenceBuiltArr = Array.from(buildSentence.children)
     // const sentenceBuilt = sentenceBuiltArr.map(el => el.innerHTML)
-    let result = null
+    // let result = null
 
     if (sentenceBuiltArr.length === sentenceToMatch.length) {
         // Not needed, just to practice the use of reduce
