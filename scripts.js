@@ -17,12 +17,14 @@ const removeChildren = container => {
     }
 }
 
-/*
+const removeClassNames = (block, classNames) => {
+    classNames.forEach(className => {
+        if (block.className.includes(className)) {
+            block.classList.remove(className)
+        }
+    })
+}
 
-Needs more work: after clicking on submit button, if block is placed back individually,
-                 it keeps the correct or incorrect class
-
-*/
 const addToggleToWordBlock = (
     wordBlock, 
     container1, 
@@ -35,6 +37,8 @@ const addToggleToWordBlock = (
         } else {
             container2.removeChild(wordBlock)
             container1.append(wordBlock)
+
+            removeClassNames(wordBlock, ['correct', 'incorrect'])
         }
     })
 }
@@ -75,6 +79,8 @@ submit.addEventListener('click', () => {
         // result = sentenceBuilt.reduce((acc, curr) => acc + ' ' + curr)
         
         for (let i = 0; i < sentenceToMatch.length; i++) {
+            removeClassNames(sentenceBuiltArr[i], ['correct', 'incorrect'])
+            
             if (sentenceToMatch[i] === sentenceBuiltArr[i].innerHTML) {
                 sentenceBuiltArr[i].classList.add('correct')
             } else {
